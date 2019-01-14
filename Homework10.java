@@ -1,6 +1,9 @@
 import java.util.ArrayList;
-
+//George Doster
 public class Homework10 {
+private int[][] arr;
+private int row;
+private int col;
 
 	/* Finish the constructor and create any necessary instance
 	 * variables. The constructor should create and save a
@@ -8,6 +11,9 @@ public class Homework10 {
 	 * columns
 	 */
 	public Homework10(int rows, int cols) {
+arr = new int[rows][cols];
+row = rows;
+col = cols;
 
 	}
 
@@ -17,13 +23,22 @@ public class Homework10 {
 	 * row major order. Return the filled array
 	 */
 	public int[][] problem1(int n) {
-
+		int num = n;
+for (int i = 0; i < row; i++){
+	for (int j = 0; j < col; j++){
+		arr[i][j] = num;
+		num ++;
+	}
+}return arr;
 	}
 
 	/* Return row r of the stored array
 	 */
 	public int[] problem2(int r) {
-
+		int[] roww = new int[col];
+for (int i = 0; i < col; i++){
+		roww[i] = arr[r][i];
+	}return roww;
 	}
 
 	/* Find and return the sum of the indicated cell and its
@@ -32,26 +47,61 @@ public class Homework10 {
 	 * or more neighbors
 	 */
 	public int problem3(int r, int c) {
-
+		int right;
+		int left;
+		int up;
+		int down;
+			if ((c - 1) < 0){
+				left = 0;
+			}else{
+				left = arr[r][c-1];
+			}if ((c + 1) >= arr[0].length){
+				right = 0;
+			}else{
+				right = arr[r][c+1];
+			}if ((r - 1) < 0){
+				up = 0;
+			}else{
+				up = arr[r - 1][c];
+			} if ((r + 1) >= arr.length){
+				down = 0;
+			}else{
+				down = arr[r + 1][c];
+			}
+			int middle = arr[r][c];
+			return middle + right + left + up + down;
 	}
 
 	/* Create and return an ArrayList that contains the
 	 * elements from the indicated column
 	 */
 	public ArrayList<Integer> problem4(int c) {
-
-	}
+		ArrayList<Integer> contains = new ArrayList<Integer>();
+		for (int i = 0; i < arr.length; i++){
+			int num = arr[i][c];
+			contains.add(num);
+	}return contains;
+}
 
 	/* Calculate and return the sum of the integers in
 	 * the supplied ArrayList
 	 */
 	public int problem5(ArrayList<Integer> aList) {
-
+			int total = 0;
+			for (int i: aList){
+				total += i;
+			}return total;
 	}
+
+
+
+
 
 	public static void main(String[] args) {
 		boolean passed = true;
 		Homework10 hw10 = new Homework10(5, 7);
+
+
 
 		int[][] arr2D = hw10.problem1(4);
 		if (arr2D[3][3] == 28) {
